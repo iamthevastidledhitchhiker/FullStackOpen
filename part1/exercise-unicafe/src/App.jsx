@@ -5,6 +5,8 @@ import './App.css'
 
 const Statistics = (props) => {
     return (
+        // If there hasn't been any feedback, we will display a message, otherwise return the statistics
+        props.good + props.neutral + props.bad === 0 ? <p>No feedback given</p> :
         <div>
             <h1>Statistics</h1>
             <p>Good: {props.good}</p>
