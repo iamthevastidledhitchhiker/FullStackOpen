@@ -3,6 +3,20 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+const Statistics = (props) => {
+    return (
+        <div>
+            <h1>Statistics</h1>
+            <p>Good: {props.good}</p>
+            <p>Neutral: {props.neutral}</p>
+            <p>Bad: {props.bad}</p>
+            <p>All: {props.good + props.neutral + props.bad}</p>
+            <p>Average: {(props.good - props.bad) / (props.good + props.bad)}</p>
+            <p>Positive: {(props.good / (props.good + props.neutral + props.bad)) * 100}%</p>
+        </div>
+    )
+}
+
 function App() {
   const [count, setCount] = useState(0)
     const [good, setGood] = useState(0)
@@ -25,13 +39,7 @@ function App() {
               </button>
           </div>
           <div className="feedbackstatistics">
-          <h1>Statistics</h1>
-          <p>Good: {good}</p>
-          <p>Neutral: {neutral}</p>
-          <p>Bad: {bad}</p>
-          <p>All: {good + neutral + bad}</p>
-          <p>Average: {(good - bad) / (good + bad)}</p>
-          <p>Positive: {(good / (good + neutral + bad)) * 100}%</p>
+                <Statistics good={good} neutral={neutral} bad={bad} />
           </div>
       </>
   )
