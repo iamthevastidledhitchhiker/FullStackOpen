@@ -5,7 +5,10 @@ import './App.css'
 
 function StatisticLine(props) {
     return (
-        <p>{props.text}: {props.value}</p>
+        <tr>
+            <td>{props.text}</td>
+            <td>{props.value}</td>
+        </tr>
     )
 }
 
@@ -21,17 +24,24 @@ function Button(props) {
     )
 }
 const Statistics = (props) => {
+    const all = props.good + props.neutral + props.bad;
+    const average = (props.good - props.bad) / all;
+    const positive = (props.good / all) * 100;
     return (
-        // If there hasn't been any feedback, we will display a message, otherwise return the statistics
-        props.good + props.neutral + props.bad === 0 ? <p>No feedback given</p> :
+        // If there hasn't been any feedback, we will display a message, otherwise return the statistics as a table
+        all === 0 ? <p>No feedback given</p> :
         <div>
-            <h1>Statistics</h1>
-            <StatisticLine text="Good" value={props.good} />
-            <StatisticLine text="Neutral" value={props.neutral} />
-            <StatisticLine text="Bad" value={props.bad} />
-            <StatisticLine text="All" value={props.good + props.neutral + props.bad} />
-            <StatisticLine text="Average" value={(props.good - props.bad) / (props.good + props.bad)} />
-            <StatisticLine text="Positive" value={(props.good / (props.good + props.neutral + props.bad)) * 100 + '%'} />
+         <h1>Statistics</h1>
+            <table>
+                <tbody>
+                    <StatisticLine text="Good" value={props.good} />
+                    <StatisticLine text="Neutral" value={props.neutral} />
+                    <StatisticLine text="Bad" value={props.bad} />
+                    <StatisticLine text="All" value={all} />
+                    <StatisticLine text="Average" value={average} />
+                    <StatisticLine text="Positive" value={positive + '%'} />
+                </tbody>
+            </table>
         </div>
     )
 }
